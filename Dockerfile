@@ -1,7 +1,7 @@
-FROM eclipse-temurin:17-jdk-jammy
+FROM maven:3.9.9-eclipse-temurin-17 AS build
 
-ARG JAR_FILE=target/customers-0.0.1-SNAPSHOT.jar
+WORKDIR /app
 
-COPY ${JAR_FILE} app.jar
+COPY . .
 
-ENTRYPOINT ["java","-jar","/app.jar"]
+RUN mvn clean package -DskipTests
